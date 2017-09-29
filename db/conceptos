@@ -1,0 +1,312 @@
+/*
+SQLyog Ultimate v11.11 (32 bit)
+MySQL - 5.1.33-community : Database - marijoa
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `caja_con` */
+
+DROP TABLE IF EXISTS `caja_con`;
+
+CREATE TABLE `caja_con` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cjc_cod` varchar(10) DEFAULT NULL,
+  `cjc_descri` varchar(40) DEFAULT NULL,
+  `cjc_compl` varchar(2) DEFAULT NULL,
+  `cjc_tipo` varchar(1) DEFAULT NULL,
+  `cjc_autom` varchar(2) DEFAULT NULL,
+  `cjc_gasto` varchar(60) DEFAULT NULL,
+  `cjc_er` varchar(60) DEFAULT NULL,
+  `cjc_ap` varchar(60) DEFAULT NULL,
+  `cjc_cta_cont` varchar(20) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=540 DEFAULT CHARSET=latin1;
+
+/*Data for the table `caja_con` */
+
+insert  into `caja_con`(`id`,`cjc_cod`,`cjc_descri`,`cjc_compl`,`cjc_tipo`,`cjc_autom`,`cjc_gasto`,`cjc_er`,`cjc_ap`,`cjc_cta_cont`) values (5,'1','Ventas de Mercaderias','No','E','Si','No','No','A',NULL),(6,'2','Gastos Varios','Si','S','Si','Si','No','G',NULL),(7,'3','Gastos de Personal','Si','S','No','Si','No','G',NULL),(345,'3-10','Recibo de Salario ','si','S','No','Si','No','G','4.11.01.01.08'),(9,'5','Consolidacion de Caja','No','E','Si','No','No','A',NULL),(386,'6','Entradas Diversas','No','E','No','No','No','A',NULL),(11,'7','Compra de Mercaderias','No','S','Si','Si','E','A',NULL),(12,'8','Caja','Si','S','No','Si','E','A',NULL),(13,'9','Diferencias de caja','Si','S','No','Si','No','G',NULL),(14,'10','Alquileres ','Si','S','No','Si','No','G',NULL),(16,'12','Flete','Si','S','No','Si','No','G',NULL),(17,'13','Papeleria','Si','S','No','Si','No','G',NULL),(18,'14','Utiles','Si','S','No','Si','No','G',NULL),(454,'6-4','Intereses Ganados','Si','E','No','No','No','A','3.10.01.01.01'),(20,'16','Publicidad y Propaganda','Si','S','No','Si','No','G',NULL),(21,'17','Servicios de Agua','Si','S','No','Si','No','G',NULL),(22,'18','Servicio de Electricidad','Si','S','No','Si','No','G',NULL),(23,'19','Gastos de Comunicacion','Si','S','No','Si','No','G',NULL),(24,'20','Seguros Pagados','Si','S','No','Si','No','G',NULL),(25,'21','Impuestos','Si','S','No','Si','No','G',NULL),(26,'22','Servicios Profesionales','Si','S','No','Si','No','G',NULL),(348,'131-6','Router','Si','S','No','Si','No','A','1.02.10.01.08'),(28,'24','Mantenimiento y Reparacion de Vehiculos','Si','S','No','Si','No','G',NULL),(29,'25','Seguro Vehiculos','Si','S','No','Si','No','G',NULL),(30,'26','Equipos de Oficina','Si','S','No','Si','E','G',NULL),(34,'30','Pago Cuota Creditos','Si','S','No','No','S','P',NULL),(35,'31','Gastos Bancarios','Si','S','No','Si','No','G',NULL),(213,'31-2','Sobregiros','Si','S','No','Si','No','G','4.13.01.08.10'),(37,'33','Diferencias de Cambio','Si','E','No','Si','No','A',NULL),(43,'39','Gastos Importacion','Si','S','No','Si','No','G',NULL),(44,'40','Cuentas a Pagar','Si','E','No','Si','E','P',NULL),(45,'41','Pagos por Infraestructuras Propias','Si','S','No','Si','No','A',NULL),(46,'42','Infraestructura Salones Terceros','Si','S','No','Si','No','G',NULL),(47,'43','Donaciones y Contribuciones','Si','S','No','Si','No','G',NULL),(49,'45','Prestamos ','Si','S','No','No','E','A',NULL),(55,'51','Devolucion Prestamos','Si','S','No','No','S','A',NULL),(56,'52','Vuelto por Ventas','No','S','No','No','No','A',NULL),(57,'53','Venta de Divisas','Si','S','No','No','No','A',NULL),(58,'54','Compra de Divisas','Si','E','No','No','No','A',NULL),(59,'102','Devoluciones','Si','S','No','No','No','A',NULL),(60,'55','Deposito en Cta. Cte.','No','S','Si','Si','No','A',NULL),(271,'114-3','Pago Proveedores en el Exterior','Si','S','No','No','S','P',NULL),(62,'106','Infraestructuras Propias Varias','Si','E','No','Si','E','A',NULL),(63,'138-1','Soporte Informatico','Si','S','No','Si','No','G','4.13.01.06.03'),(64,'107','Mobiliario','Si','S','No','Si','E','A',NULL),(68,'111','Dividendos  Propietarios','Si','S','No','Si','S','G',NULL),(70,'113','Inmuebles','Si','S','No','Si','E','A',NULL),(71,'114','Pago a Proveedores','Si','S','No','Si','S','P',NULL),(72,'9-1','Diferencia de Cambio','Si','S','No','Si','No','G','4.12.01.02.01'),(229,'39-1','Flete Maritimo Internacionales','Si','S','No','Si','No','G','4.11.01.03.04'),(206,'10-1','Alquileres Pagados','Si','S','No','Si','No','G','4.11.01.07.01'),(77,'12-1','Servicio de Courier','Si','S','No','Si','No','G','4.11.01.07.07'),(78,'12-2','Proveedores Fardo','Si','S','No','Si','No','G','4.11.01.07.08'),(79,'13-1','Talonario Venta','Si','S','No','Si','No','G','4.13.01.08.12'),(80,'13-2','Talonarios de Factura','Si','S','No','Si','No','G','4.13.01.08.12'),(81,'13-3','Fotocopias Documentos','Si','S','No','Si','No','G','4.13.01.08.12'),(82,'13-4','Notas de Remision','Si','S','No','Si','No','G','4.13.01.08.12'),(83,'13-5','Papel Regalo','Si','S','No','Si','No','G','4.13.01.08.12'),(84,'14-1','Boligrafos y Pinceles','Si','S','No','Si','No','G','4.13.01.08.11'),(85,'14-2','Plumeros ','Si','S','No','Si','No','G','4.13.01.07.01'),(86,'135-2','Articulos Limpieza','Si','S','No','Si','No','G','4.13.01.07.02'),(87,'14-4','Cintas y Calculadoras de Mano','Si','S','No','Si','No','G','4.13.01.08.11'),(88,'14-5','Bolsitas','Si','S','No','Si','No','G','4.11.01.07.04'),(89,'137-1','Cintas e Hilos de Embalar','Si','S','No','Si','No','G','4.11.01.07.05'),(90,'14-7','Filo de Tijeras','Si','S','No','Si','No','G','4.11.01.07.10'),(91,'13-6','Hojas de Impresion, Fax y Cuadernos','Si','S','No','Si','No','G','4.13.01.08.12'),(92,'15-1','Reparacion Puerta y Vidriales','Si','S','No','Si','No','G','4.11.01.02.05'),(93,'15-2','Reparacion Carteles','Si','S','No','Si','No','G','4.11.01.02.12'),(94,'15-3','Reparac y Mant. Aire Accondicionado','Si','S','No','Si','No','G','4.11.01.02.08'),(95,'15-4','Reparacion Instalaciones Electricas','Si','S','No','Si','No','G','4.11.01.02.04'),(96,'15-5','Mantenimiento Pintura Local','Si','S','No','Si','No','G','4.11.01.02.01'),(97,'15-6','Mant. y Reparac. Sist. Seguridad Local','Si','S','No','Si','No','G','4.11.01.02.13'),(98,'114-1','Pago Proveedores Nacionales','Si','S','No','No','S','P',NULL),(99,'9-2','Pago x  Sencillo','Si','S','No','Si','No','G','4.12.01.02.03'),(100,'111-1','Dividendos Victoira Afara de Yunis','Si','S','No','Si','S','G','1.01.15.04.01'),(101,'16-1','Publicidad Radial','Si','S','No','Si','No','G','4.11.01.04.02'),(102,'3-2','Pago Meriendas Personal - Operativos','Si','S','No','Si','S','G','4.11.01.01.13'),(103,'106-1','Infraestructuras Propias','Si','E','No','No','E','A',NULL),(104,'115','Rodados','Si','E','No','Si','E','A',NULL),(246,'102-1','Devolucion de Productos','Si','S','No','Si','No','G',NULL),(107,'116','Pago x Rodados','Si','S','No','Si','S','A',NULL),(108,'116-1','Pago x Moto','Si','S','No','Si','S','A',NULL),(109,'19-1','Copaco ','Si','S','No','Si','No','G','4.13.01.02.02'),(110,'6-1','Entrada Ajuste x Error Sistema','Si','E','No','No','No','A',NULL),(111,'9-3','Entrada por redondeo en Caja','Si','E','No','No','No','A','4.12.01.02.01'),(112,'18-1','Servicio de Energia Electrica','Si','S','No','Si','No','G','4.13.01.02.01'),(113,'43-14','Organizaciones Religiosas','Si','S','No','Si','No','G','4.13.01.08.14'),(114,'21-1','Tasas Municipales','Si','S','No','Si','No','G','4.13.01.08.17'),(115,'130-1','Pasajes de Traslado Personas','Si','S','No','Si','No','G','4.11.01.05.01'),(116,'116-2','Pago x Vehiculos','Si','S','No','Si','S','A','1.02.10.01.04'),(117,'45-1','Juan Afara','Si','S','No','No','E','A',''),(118,'45-2','Rossi Afara','Si','S','No','Si','E','A',NULL),(119,'45-3','Prestamos Particulares','Si','S','No','No','E','A',''),(120,'117','Pago de Prestamos','Si','E','No','Si','S','A',NULL),(121,'117-5','Pago Juan Afara','Si','E','No','No','S','A',NULL),(122,'117-5','Pago Prestamo Rossi Afara','Si','E','No','No','S','A',NULL),(123,'117-5','Pago Prestamos Agroserrana','Si','E','No','No','S','A',NULL),(126,'13-7','Tarjetas Personales','Si','S','No','Si','No','G','4.13.01.08.12'),(127,'15-7','Reparacion Estructura Local (Tech,Pared)','Si','S','No','Si','No','G','4.11.01.02.03'),(128,'133-1','Fletes Pagados por Distribución y Ventas','Si','S','No','Si','No','G','4.11.01.07.03'),(344,'22-22','Gastos de Escribania','Si','S','No','Si','No','G','4.13.01.08.05'),(130,'130-6','Combustible Motocicletas','Si','S','No','Si','No','G','4.11.01.05.02'),(514,'169-1','Sistema SAP','Si','S','Si','Si','S','A',''),(132,'118-1','Pago Muebles Salon Ventas','Si','S','No','Si','S','A','1.02.10.01.06'),(133,'17-1','Agua Mineral','Si','S','No','Si','No','G','4.13.01.08.09'),(134,'13-8','Talonario de Recibo, Pagares,Cheques','Si','S','No','Si','No','G','4.13.01.08.12'),(135,'14-8','Cafeteria','Si','S','No','Si','No','G','4.11.01.07.02'),(137,'119','Pago de Inmuebles','Si','S','No','Si','S','A',NULL),(138,'119-1','Pago x Inmueble ','Si','S','No','Si','S','A','1.02.10.01.01'),(139,'43-2','Colaboracion Salud Funcionarios','Si','S','No','Si','No','G','4.13.01.08.14'),(140,'43-3','Apoyo a Entes Gubernamentales','Si','S','No','Si','No','G','4.13.01.08.14'),(141,'16-2','Publicidad Escrita','Si','S','No','Si','No','G','4.11.01.04.01'),(142,'45-4','Victoria Afara (Mama)','Si','S','No','Si','E','A',NULL),(143,'51-1','Devoluciones Victoria Afara','Si','E','No','No','S','A',NULL),(144,'117-5','Victoria Afara (Mama)','Si','E','No','No','S','A',NULL),(145,'19-2','Internet ','Si','S','No','Si','No','G','4.13.01.02.04'),(146,'14-9','Carpetas y Biblioratos','Si','S','No','Si','No','G','4.13.01.08.11'),(149,'16-3','Publicidad Television','Si','S','No','Si','No','G','4.11.01.04.03'),(150,'43-4','Bomberos Voluntarios ','Si','S','No','Si','No','G','4.13.01.08.14'),(151,'13-9','Cartulina y Sobres','Si','S','No','Si','No','G','4.13.01.08.12'),(152,'14-10','Clips, Grampas y Esponja Caja','Si','S','No','Si','No','G','4.13.01.08.11'),(513,'39-13','Despachos Contables','Si','S','No','Si','No','G','4.11.01.03.13'),(155,'24-1','Repuestos Motos ','Si','S','No','Si','No','G','4.11.01.02.09'),(156,'24-2','Mantenimiento Motos ','Si','S','No','Si','No','G','4.11.01.02.09'),(157,'137-3','Carpas de Embalar','Si','S','No','Si','No','G','4.11.01.07.15'),(158,'120','Cobro Cuota a Cliente','Si','E','No','No','S','A',NULL),(159,'120-1','Cobra Cuota Cliente','Si','E','No','No','S','A',NULL),(208,'21-3','Impuesto a la Renta','Si','S','No','Si','No','G','4.13.01.08.19'),(162,'134-1','Servicio de Seguridad','Si','S','No','Si','No','G','4.13.01.02.05'),(210,'26-2','Celulares y Cargadores','Si','S','No','Si','Si','G',NULL),(164,'134-2','Monitoreo Sistema Alarma','Si','S','No','Si','No','G','4.13.01.02.06'),(211,'135-3','Servicio Fumigacion','Si','S','No','Si','No','G','4.11.01.02.11'),(167,'3-3','Uniformes Personales - Operativos','Si','S','No','Si','No','G','4.11.01.01.09'),(168,'43-5','Asilo de Ancianos Encarnacion','Si','S','No','Si','No','G','4.13.01.08.14'),(169,'43-6','Donaciones a Personas Necesitadas','Si','S','No','Si','No','G','4.13.01.08.14'),(170,'121','Asociaciones','Si','S','No','Si','No','G',NULL),(171,'121-1','Camara de Comercio','Si','S','No','Si','No','G',NULL),(172,'22-6','Gestor Documentaciones','Si','S','No','Si','No','G','4.13.01.08.04'),(227,'138-4','Cartucho Tinta Impresora','Si','S','No','Si','No','G','4.13.01.06.02'),(209,'21-4','I.V.A Impuesto al Valor Agregado','Si','S','No','Si','No','G','4.13.01.08.18'),(175,'17-2','Servicio de Agua ','Si','S','No','Si','No','G','4.13.01.02.03'),(178,'14-12','Terciada p/Tablitas','Si','S','No','Si','No','G','4.11.01.07.12'),(179,'111-2','Dividendos Maria Yunis','Si','S','No','Si','S','G','1.01.15.04.06'),(180,'19-3','Tigo Corporativo','Si','S','No','Si','No','A','1.01.15.05.03'),(181,'16-4','Publicidad Carteles y Pasacalles','Si','S','No','Si','No','G','4.11.01.04.04'),(182,'43-7','Policia Nacional ','Si','S','No','Si','No','G','4.13.01.08.14'),(184,'22-9','Itapua Confidencial','Si','S','No','Si','No','G','4.13.01.08.07'),(186,'2-3','Capellania','Si','S','No','Si','No','G','4.13.01.08.01'),(207,'21-2','Impuesto Inmoviliario','Si','S','No','Si','No','G','4.13.01.08.20'),(212,'31-1','Pago de Intereses','Si','S','No','Si','No','G',NULL),(189,'43-9','Cortes de Tela Sorteos en Rifas ','Si','S','No','Si','No','G','4.13.01.08.14'),(190,'24-3','Mantenimiento Vehiculos','Si','S','No','Si','No','G','4.11.01.02.09'),(191,'24-4','Lavadero Motos ','Si','S','No','Si','No','G','4.11.01.02.09'),(192,'43-10','Ex-Combatientes ','Si','S','No','Si','No','G','4.13.01.08.14'),(194,'15-8','Rep. y Mant. de Muebles y Equipos','Si','S','No','Si','No','G','4.11.01.02.07'),(196,'20-5','Seguro Vehiculos','Si','S','No','Si','No','G',NULL),(198,'42-1','Accesorios para Salon','Si','S','No','Si','No','G','4.11.01.07.17'),(200,'13-10','Etiqueta p/Codigo de Barra','Si','S','No','Si','No','G','4.13.01.08.12'),(201,'51-2','Devoluciones Varias','Si','E','No','No','S','A',NULL),(202,'24-5','Lavaderos Vehiculos','Si','S','No','Si','No','G',NULL),(203,'6-2','Entradas Varias','Si','E','No','No','No','A',NULL),(204,'3-1','Pago Adelantados','Si','S','No','Si','No','G','1.01.15.05.01'),(205,'8-1','Salida de Caja por vuelto','Si','S','No','Si','No','G','4.11.01.07.30'),(214,'31-3','Comision x Saldo Minimo','Si','S','No','Si','No','G','4.13.01.08.10'),(215,'45-5','Luis Godoy','Si','S','No','Si','E','A',NULL),(217,'45-6','Luis Vazquez','Si','S','No','Si','E','A',NULL),(218,'123','Transferencias','Si','S','No','Si','No','P',NULL),(219,'123-1','Transferencias entre Cuentas','Si','S','No','No','No','A',NULL),(221,'51-3','Devolucion Caja Chica','Si','S','No','No','No','A',NULL),(222,'51-4','Devolucion Caja Chica  ','Si','E','No','No','No','A',NULL),(223,'20-1','Seguro de Incendio ','Si','S','No','Si','No','G',NULL),(224,'20-2','Seguro Robo Mercaderias','Si','S','No','Si','No','G',NULL),(225,'20-3','Seguro de Robo Valores en Caja','Si','S','No','Si','No','G',NULL),(226,'24-6','Reparacion Vehiculos','Si','S','No','Si','No','G','4.11.01.02.09'),(228,'30-1','Pago Cuota Credito','Si','S','No','Si','S','G',NULL),(230,'39-2','Comision Operadores Origen','Si','S','No','Si','No','G',NULL),(231,'39-3','Costos Operativos Viajes Exterior','Si','S','No','Si','No','G','4.11.01.03.05'),(232,'39-4','Costos Manipuleo Contenedor ','Si','S','No','Si','No','G','4.11.01.03.02'),(233,'39-5','Costo de Despacho','Si','S','No','Si','No','G','4.11.01.03.01'),(234,'39-6','Costo Financiero','Si','S','No','Si','No','G',NULL),(343,'141-2','Antena','No','S','No','Si','No','A','1.02.10.01.03'),(236,'107-1','Muebles de Oficina','Si','S','No','Si','S','A','1.02.10.01.06'),(237,'107-2','Muebles Salon Ventas','Si','S','No','Si','S','A','1.02.10.01.06'),(238,'113-1','Inmueble','Si','E','No','No','E','A',NULL),(239,'115-1','Rodados Varios','Si','E','No','No','E','A',NULL),(240,'118-2','Pago Muebles Oficina','Si','S','No','Si','S','A','1.02.10.01.06'),(241,'8-2','Entrada en Caja por vuelto','Si','E','No','No','S','G','3.10.02'),(242,'1-1','Venta al Contado','Si','E','Si','No','No','A','3.01.01.01.01'),(243,'1-2','Venta a Credito','No','E','No','No','E','A','3.01.01.01.01'),(244,'7-1','Compra al Contado','Si','S','Si','No','E','A','1.01.10.01.01'),(245,'7-2','Compra a Credito','Si','S','Si','No','E','A','1.01.10.01.01'),(247,'138-3','Accesorios Computadora','Si','S','No','Si','No','G','4.13.01.06.01'),(248,'120-2','Cobro Cuota Convenio','No','E','No','No','No','A',NULL),(249,'15-11','Plomeria','Si','S','No','Si','No','G','4.11.01.02.02'),(250,'39-7','Transferencias','Si','S','No','Si','No','G',NULL),(251,'22-12','Asesoria Juridica','Si','S','No','Si','No','G','4.13.01.03.01'),(252,'22-13','Analisis Empresariales','Si','S','No','Si','No','G','4.11.01.07.06'),(253,'7-3','Confeccion de Manteles','Si','S','No','Si','No','G','4.11.01.07.24'),(254,'26-4','Calentador de Agua','Si','S','No','Si','S','A',NULL),(255,'132-1','Herramientas Varias','Si','S','No','Si','No','A','1.02.10.01.09'),(256,'21-5','Multas Varias ','Si','S','No','Si','No','G','4.13.01.08.15'),(257,'21-6','Instituto Prevision Social (I.P.S)','Si','S','No','Si','No','G',NULL),(258,'22-14','Estudio Contable','Si','S','No','Si','No','G','4.13.01.03.03'),(259,'3-4','Cursos de Capacitacion - Operativos','Si','S','No','Si','No','G','4.11.01.01.04'),(260,'15-9','Reparacion y Mantenimiento Maquinarias','Si','S','No','Si','No','G','4.11.01.02.10'),(261,'20-4','Seguro Carteles Comerciales','Si','S','No','Si','No','G',NULL),(262,'3-5','Premios por Meta - Ventas','Si','S','No','Si','No','G','4.12.01.01.03'),(263,'134-4','Recarga de Extintores','Si','S','No','Si','No','G','4.13.01.08.22'),(264,'43-11','Presentes Empresariales','Si','S','No','Si','No','G','4.13.01.08.14'),(265,'55-1','Deposito en C.C. Proveedor','Si','S','No','Si','No','A',NULL),(266,'114-2','Pago Confeccionista','Si','S','No','Si','S','G',NULL),(267,'33-1','Entrada x Diferencias de Cambio','Si','E','No','No','No','A',NULL),(268,'53-1','Venta de Divisas','Si','S','No','Si','No','G',NULL),(269,'54-1','Compra de Divisa','Si','E','No','No','No','A',NULL),(270,'33-2','Salida x Diferencia de Cambio','Si','S','No','Si','No','G','4.12.01.02.01'),(278,'3-6','Indem. x Liquidacion - Operativos','Si','S','No','Si','No','G','4.11.01.01.05'),(273,'124','Creditos Financieros','Si','E','No','No','E','P',NULL),(274,'124-1','Creditos Financieros-Hugo Hutz','Si','S','No','Si','E','P',NULL),(275,'125','Pago Creditos Financieros','Si','S','No','No','S','P',NULL),(276,'125-1','Pago Creditos Financieros-Hugo Hutz','Si','S','No','Si','S','G',NULL),(279,'41-1','Construcciones Civiles','Si','S','No','Si','No','A',NULL),(282,'12-6','Viatico Camion','Si','S','No','Si','No','G','4.11.01.05.02'),(511,'21-13','Registro de Marcas','Si','S','No','Si','No','A','4.13.01.08.25'),(512,'2-1','Gastos Varios','Si','S','No','Si','No','G','4.11.01.07.18'),(285,'43-12','Apoyo a Organizaciones Sociales','Si','S','No','Si','No','G','4.13.01.08.14'),(300,'45-8','Maria Yunis (Hija)','No','S','No','Si','E','A',NULL),(287,'124-2','Banco Continental','Si','E','No','No','E','P',NULL),(288,'14-16','Muestrarios','Si','S','No','Si','No','G','4.11.01.07.11'),(289,'126','Maquinarias y Equipos','Si','S','No','Si','E','A',NULL),(290,'127','Pago Maquinarias y Equipos','Si','E','No','Si','S','P',NULL),(291,'127-1','Maquinas de Medicion y Liado','Si','S','No','Si','S','A','1.02.10.01.05'),(292,'125-2','Pago Credito a Victoira Afara','Si','S','No','Si','S','G',NULL),(293,'128','I.V.A Caja','No','E','No','No','No','A',NULL),(294,'45-0','Prestamos','Si','E','Si','No','E','A',NULL),(295,'43-13','Colaboracion Familiares','Si','S','No','Si','No','G','4.13.01.08.14'),(296,'3-0','Sueldos y Jornales - Operativos','Si','S','Si','Si','No','G','4.11.01.01.01'),(297,'13-11','Diarios y Revistas','Si','S','No','Si','No','G','4.13.01.08.12'),(298,'3-7','Refrigerios Directorio','No','S','No','Si','No','G','4.13.01.04.04'),(299,'45-7','Gladys Yunis','Si','S','No','Si','E','A',NULL),(301,'55-2','Deposito en Cta. Cte.','Si','E','No','No','No','A',NULL),(302,'45-9','Elias Yunis','Si','S','No','Si','E','A',NULL),(303,'123-2','deposito por transferencia entre cuentas','Si','E','No','No','No','A',NULL),(304,'21-7','Estacionamiento','Si','S','No','Si','No','G','4.11.01.05.05'),(305,'130','Movilidad y Viatico','Si','S','No','Si','No','G',NULL),(306,'131','Equipos de Informatica','Si','S','No','Si','No','A',NULL),(307,'132','Herramientas','Si','S','No','Si','No','A',NULL),(308,'21-8','Peaje','Si','S','No','Si','No','G','4.11.01.05.06'),(309,'133','Gastos de Encomienda','Si','S','No','Si','No','G',NULL),(310,'14-17','Utiles Varios','Si','S','No','Si','No','G','4.11.01.07.09'),(311,'24-7','Accesorios de Vehiculos','Si','S','No','Si','No','G','4.11.01.02.09'),(312,'131-2','Notebook','Si','S','No','Si','No','A','1.02.10.01.08'),(313,'131-3','Computadora PC','Si','S','No','Si','No','A','1.02.10.01.08'),(314,'134','Seguridad y Vigilancia','Si','S','No','Si','No','G',NULL),(315,'135','Gastos de Mantenimiento Local','Si','S','No','Si','No','G',NULL),(316,'135-1','Servicio de Limpieza','Si','S','No','Si','No','G','4.13.01.07.03'),(317,'131-4','Perifericos de PC','Si','S','No','Si','No','A','1.02.10.01.08'),(318,'136','Mermas','Si','S','No','Si','No','G',NULL),(319,'136-1','Retazos','No','S','No','Si','No','G',NULL),(320,'14-18','Utiles de Oficina','Si','S','No','Si','No','G','4.13.01.08.11'),(324,'6-3','Saldo Inicial','Si','E','Si','No','No','A',NULL),(325,'102-2','Devolucion por Falla','Si','S','No','Si','No','G',NULL),(326,'19-4','Mini Carga','Si','S','No','Si','No','G',NULL),(327,'138-2','Rep. y Mant. Equipos de Informatica','Si','S','No','Si','NO','G','4.13.01.06.04'),(328,'107-3','Muebles y Equipos','Si','S','No','Si','E','A','1.02.10.01.06'),(329,'3-8','Primeros Auxilios','Si','S','No','Si','No','G','4.11.01.01.07'),(330,'137','Gastos de Embalaje','No','S','No','Si','No','G',NULL),(331,'19-5','Accesorio para Celular','Si','S','No','Si','No','G',NULL),(332,'138','Gastos de Informatica','Si','S','No','Si','No','G',NULL),(333,'130-2','Combustible y Lubricantes','Si','S','No','Si','No','G','4.11.01.05.02'),(334,'130-3','Consumicion','Si','S','No','Si','No','G','4.11.01.05.04'),(335,'9-4','Descuentos en Caja','Si','S','No','Si','No','G','4.12.01.02.01'),(336,'137-2','Bolsas para Empaque','Si','S','No','Si','No','G','4.11.01.07.14'),(337,'131-5','Impresora','Si','S','No','Si','No','A','1.02.10.01.08'),(338,'141','Instalaciones','No','S','No','Si','No','A',NULL),(339,'141-1','Aire Acondicionado','Si','S','No','Si','No','A','1.02.10.01.03'),(340,'136-2','Perdidas por Mermas','Si','S','No','Si','No','G','4.11.01.07.16'),(341,'21-9','Patentes','Si','S','No','Si','No','G','4.13.01.08.16'),(342,'3-9','Festejos de Fin de Año','Si','S','No','Si','No','G','4.11.01.01.11'),(346,'132-2','Escalera','Si','S','No','Si','No','A','1.02.10.01.09'),(347,'13-12','Impresiones','Si','S','No','Si','No','G','4.13.01.08.13'),(349,'2-4','Artefactos Electricos','Si','S','No','Si','No','G','4.11.01.07.09'),(350,'134-3','Cintas de Precausion','Si','S','No','Si','No','G',NULL),(351,'131-1','Servidor','Si','S','No','Si','No','A','1.02.10.01.08'),(352,'3-11','Remuneracion Jose Yunis','Si','S','No','Si','No','G','4.13.01.04.02'),(353,'144','Retenciones','No','S','No','No','No','P',NULL),(354,'144-1','Retencion de I.V.A./Renta','Si','S','No','Si','No','A','1.01.03.04'),(356,'22-23','Consultora','Si','S','No','Si','No','G','4.13.01.03.02'),(368,'3-12','Festejos-Cumpleaños','Si','S','No','Si','No','G','4.11.01.01.11'),(358,'138-5','Desarrollo y Mant. de Software','Si','S','No','Si','No','G','4.13.01.03.06'),(359,'31-4','Gastos bancarios','Si','S','No','Si','No','G','4.13.01.08.10'),(360,'111-3','Dividendos Amin Yunis','Si','S','No','Si','S','G','1.01.15.04.02'),(361,'111-4','Dividendos Elias Yunis','Si','S','No','Si','S','G','1.01.15.04.03'),(362,'149-1','Casa Maria Victoria','Si','S','No','Si','No','G','1.01.15.04.01'),(363,'149','Construcciones','Si','S','No','Si','No','A',NULL),(364,'150-1','Demanda Estela Chamorro','Si','S','No','Si','No','G',NULL),(365,'151-1','Cheques Rechazadoos Debito','Si','E','No','No','No','A',NULL),(366,'151-2','Cheque Rechazado Credito','Si','S','No','No','No','A',NULL),(367,'151','Cheques Rechazados','Si','E','No','No','No','A',NULL),(390,'131-7','Lectores','Si','S','No','Si','No','A','1.02.10.01.08'),(370,'33-3','Diferencia x Redondeo de Cheque','No','E','No','No','No','A',NULL),(371,'135-4','Aromatizadores','Si','S','No','Si','No','G','4.13.01.07.04'),(372,'22-24','Inforcomf','Si','S','No','Si','No','G','4.13.01.08.08'),(373,'39-8','Flete Terrestre Internacionales','Si','S','No','Si','No','G','4.11.01.03.03'),(374,'126-1','Maquinarias y Equipos','Si','S','No','Si','No','A','1.02.10.01.05'),(375,'130-8','Hospedaje','Si','S','No','Si','No','G','4.11.01.05.03'),(377,'3-13','Regalos','Si','S','No','Si','No','G','4.11.01.01.11'),(378,'22-25','Servicio de Tasacion','Si','S','No','Si','No','G','4.13.01.08.06'),(379,'102-3','Devolucion Alquiler Uninorte','Si','S','No','No','No','A',NULL),(380,'19-6','Correo','Si','S','No','Si','No','G',NULL),(381,'135-5','Accesorios para salon','Si','S','No','Si','No','G','4.11.01.07.17'),(382,'1-3','Seña por Reserva','No','E','Si','No','No','A',NULL),(383,'1-4','Salida por Seña de Mercaderias','No','S','No','No','No','A',NULL),(384,'21-10','Planilla Anual M.J.T.','Si','S','No','Si','No','G',''),(385,'39-9','Mermas de importacion','Si','S','No','Si','No','G','4.11.01.03.06'),(387,'133-2','Pago Encomienda varias','Si','S','No','Si','No','G','4.11.01.07.03'),(388,'160-1','Intereses Pagados Banco Regional','Si','S','No','Si','No','G','4.11.01.06.01'),(389,'160','Intereses Sobre Prestamos','Si','S','No','Si','No','G',NULL),(391,'138-6','Instalacion de Equipos','Si','S','No','Si','No','G',NULL),(392,'3-14','Aguinaldos Pagados - Operativos','Si','S','No','Si','No','G','4.11.01.01.06'),(393,'3-15','Estetica del Personal','Si','S','No','Si','No','G',NULL),(396,'141-3','Rack','Si','S','No','Si','No','A','1.02.10.01.03'),(397,'141-4','Accesorios-Fichas-Uniones-Cables','Si','S','No','Si','No','A','1.02.10.01.03'),(399,'15-12','Refacciones','Si','S','No','Si','S','G','4.11.01.02.06'),(515,'141-8','Sistema SAP','Si','S','Si','Si','S','A',''),(401,'14-19','Cartelitos ','Si','S','No','Si','No','G','4.11.01.07.09'),(402,'137-4','Hule Termocontraible','Si','S','No','Si','No','G','4.11.01.07.04'),(403,'141-5','Equipos grabadoras','Si','S','No','Si','No','A','1.02.10.01.03'),(405,'22-26','Pago D´ angelo','Si','S','No','Si','No','G','4.11.01.01.04'),(406,'10-2','Alquiler 00','Si','S','No','No','No','A',NULL),(407,'14-20','Sellador','Si','S','No','Si','No','G','4.11.01.07.13'),(408,'45-13','Antonio Kalabura','Si','S','No','No','No','A',NULL),(409,'3-16','Sueldo por Cheque','Si','S','Si','Si','No','A','4.11.01.01.01'),(410,'21-11','I.P.S. Cheques','No','S','No','No','No','A',NULL),(411,'3-17','I.P.S. Aporte Patronal-Operativo','No','S','No','Si','No','G',''),(412,'2-5','Lavanderia','Si','S','No','Si','No','G','4.11.01.07.06'),(413,'136-3','Gasto de Codificacion ','Si','S','No','Si','No','G','4.11.01.07.19'),(414,'16-5','Auspicios y Participacion','Si','S','No','Si','No','G','4.11.01.04.05'),(415,'22-27','Servicio de Auditoria','Si','S','No','Si','No','G','4.13.01.03.05'),(416,'134-5','Extintores','Si','S','No','Si','No','A','4.13.01.08.22'),(417,'3-18','Reclutamiento de Personal','Si','S','No','Si','No','G',NULL),(418,'20-6','Seguros Pagados  ','Si','S','No','Si','No','G','4.13.01.08.02'),(419,'160-2','Intereses Pagados Hugo Hutz','Si','S','No','Si','No','G','4.11.01.06.02'),(420,'3-19','Pago Merienda del Personal- Ventas','Si','S','No','Si','S','G','4.12.01.01.08'),(421,'3-20','Pago Merienda del Personal - Administ.','Si','S','No','Si','S','G','4.13.01.01.08'),(422,'3-21','Uniformes del Personal - Ventas','Si','S','No','Si','No','G','4.12.01.01.09'),(423,'3-22','Uniformes del Personal - Admin.','Si','S','No','Si','S','G','4.13.01.01.09'),(424,'3-23','Cursos de Capacitacion - Ventas','Si','S','No','Si','S','G','4.12.01.01.04'),(425,'3-24','Cursos de Capacitacion - Admin.','Si','S','No','Si','S','A','4.13.01.01.04'),(426,'3-25','Premios por Meta - Cajeros','Si','S','No','Si','No','G','4.11.01.01.03'),(427,'3-26','Indem. x Liquidación - Ventas','Si','S','No','Si','No','G','4.12.01.01.05'),(428,'3-27','Indem. x Liquidación - Administración','Si','S','No','Si','No','G','4.13.01.01.05'),(429,'3-28','Sueldos y Jornales - Ventas','Si','S','No','Si','No','G','4.12.01.01.01'),(430,'3-29','Sueldos y Jornales - Administración','Si','S','No','Si','No','G','4.13.01.01.01'),(431,'3-30','Remuneracion Ricardo Yunis','Si','S','No','Si','No','G','4.13.01.04.03'),(432,'3-31','Remuneración Maria Victiria Afara','Si','S','No','Si','S','G','4.13.01.04.01'),(433,'3-32','Aguinaldos Pagados - Ventas','Si','S','No','Si','No','A','4.12.01.01.06'),(434,'3-33','Aguinaldos Pagados - Administración','Si','S','No','Si','No','G','4.13.01.01.06'),(435,'16-6','Obsequios Publicitarios','Si','S','No','Si','No','G','4.11.01.04.06'),(439,'165-1','Anticipo IRACIS Marijoa SRL','Si','S','No','Si','S','A','1.01.15.03.01'),(437,'163','Mejoras en Predio de Terceros','Si','S','No','Si','S','A',NULL),(438,'163-1','Mejoras en Predio de Terceros','Si','S','No','Si','S','A','1.02.10.01.10'),(440,'165-2','Anticipo IRACIS Com.e Ind. Marijoa SRL','Si','S','No','Si','S','A','1.01.15.03.02'),(441,'165','Anticipos','Si','S','No','Si','S','A',NULL),(442,'141-6','Carteles y Letreros','Si','S','No','Si','S','A','1.02.10.01.03'),(443,'1-5','Venta con Tarjetas','No','E','No','No','No','A','1.01.03.01.03'),(444,'131-8','Switcher','Si','S','No','Si','S','A','1.02.10.01.08'),(445,'10-3','Condominio','Si','S','No','Si','No','A','4.11.01.07.01'),(448,'9-5','Salida por redondeo en Caja','No','S','No','Si','No','A','1.01.01.01'),(449,'141-7','Telefonos','Si','S','No','Si','S','A','1.02.10.01.03'),(450,'130-9','Fletes Pagados','Si','S','No','Si','No','A','4.11.01.05'),(451,'3-34','Aguinaldo Cheque','Si','S','No','No','No','A','4.13.04'),(452,'3-35','I.P.S. Aporte Patronal-Ventas','Si','S','No','Si','No','A','4.11.01.01.02'),(453,'3-36','I.P.S. Aporte Patronal-Administracion','Si','S','No','Si','No','A','4.11.01.01.02'),(455,'167','Costo de Ventas','No','S','No','Si','No','A',NULL),(456,'167-1','Costo de Mercaderia Vendidas','Si','S','No','Si','No','A','4.01.01.01'),(457,'167-2','Comisiones pagadas por Tarjetas','Si','S','No','Si','No','G','4.01.01'),(458,'167-3','Descuentos Concedidos','Si','S','No','Si','No','A','4.12.04'),(474,'55-3','Deposito Cta. Cte. Caja Chica','Si','S','No','No','No','A','1.01.03.06.01'),(473,'41-2','Refacciones','Si','S','No','Si','No','A','1.02.10.01.11'),(472,'160-3','Intereses Pagados Banco Continental SAEC','Si','S','No','Si','No','G',''),(19,'15','Reparaciones Varias en Local','No','S','No','Si','No','G','4.11.01.02'),(475,'3-37','Premios por Cheques','Si','S','No','No','No','A','2.01.11.03'),(476,'41-3','Topografia','Si','S','No','Si','S','G','4.11.01.02.14'),(477,'3-38','Prestamos a Funcionarios','Si','S','No','No','No','A','1.01.15.05.02'),(478,'3-39','Tigo Corporativo','Si','S','No','No','No','A','1.01.15.05.03'),(479,'3-40','Otros descuentos a Funcionarios','Si','S','No','Si','No','A','1.01.15.05.04'),(480,'165-3','Alquileres Pagados por Adelantado','Si','S','No','Si','S','A','1.01.20.01.01'),(481,'22-28','Gastos de Fusion','Si','S','No','Si','S','G','1.02.20.05'),(482,'8-3','Gastos caja anterior','Si','S','No','No','No','G','1.01.01.01'),(483,'3-41','Premios por Meta - Empaque','Si','S','No','Si','No','G','2.01.11.03.01'),(484,'39-10','Garantia de Despacho','Si','S','No','No','No','G','4.12.07'),(485,'131-9','Tablet','Si','S','No','Si','No','A','1.02.10.01.08'),(501,'14-24','Canhos','Si','S','No','Si','No','G','4.11.01.07.27'),(486,'3-42','Gastos de Inventario','Si','S','No','Si','No','G','4.11.01.01.14'),(487,'12-3','Fletes Nacionales por Compras de Mercade','Si','S','No','Si','S','G','4.11.01.07.21'),(488,'39-11','Estibaje Internacional','Si','S','No','Si','S','G','4.11.01.03.11'),(489,'16-7','Catalogos','Si','S','No','Si','S','G','4.11.01.04.07'),(490,'14-21','Pallet','Si','S','No','Si','No','G','4.11.01.07.22'),(491,'14-22','Gomitas','Si','S','No','Si','No','G','4.11.01.07.23'),(492,'121-2','Rubens','Si','S','No','No','No','G','2.01.01.04.164'),(493,'7-4','Matelaceado','Si','S','No','Si','No','G','4.11.01.07.25'),(494,'14-23','Presintas','Si','S','No','Si','No','G','4.11.01.07.26'),(495,'39-12','Otros Gastos de Importacion','Si','S','No','Si','S','G','4.11.01.03.12'),(499,'21-12','Retiro de Utilidad','Si','S','No','Si','No','G','4.13.01.08.24'),(503,'14-25','Vasos y servilletas','Si','S','No','Si','No','G','4.11.01.07.28'),(500,'13-13','Talonario de Uso Interno','Si','S','No','Si','No','G','4.13.01.08.12.01'),(502,'16-8','Impresiones Publicitarios','Si','S','No','Si','No','G','4.11.01.04.08'),(504,'12-4','Comisiones por giro Cambios Chaco','Si','S','No','Si','No','G','4.11.01.07.29'),(505,'45-14','Ricardo Yunis','Si','S','No','Si','No','A','1.01.03.06.03'),(506,'167-4','Gasto de Comisiones por Venta','Si','S','No','Si','S','G','4.12.05.01.01'),(507,'16-9','Pago a TVS Encarnacion','Si','S','No','No','No','G','4.11.01.04.03'),(508,'45-15','Arnaldo Aquino','Si','S','No','No','No','A','2.02.01.02'),(509,'7-5','Fraccionamiento de Manteles','Si','S','No','Si','No','P','4.11.01.07.24'),(510,'7-6','Confecciones Varias','Si','S','No','Si','No','A','4.11.01.07.31'),(516,'45-16','Amin Yunis','Si','S','No','Si','No','A','1.01.03.06.04'),(517,'171','Activo Intangible','No','S','No','Si','No','A',NULL),(518,'171-1','Software','Si','S','No','Si','No','A','1.02.20.06'),(519,'171-2','Marcas Registrada','Si','S','No','Si','No','A','1.02.20.02'),(520,'','','No','E','No','No','No','A',NULL),(521,'','','No','E','No','No','No','A',NULL),(522,'1-6','Cobro por Servicio de Confeccion','Si','E','Si','No','E','A','3.01.01.01'),(523,'21-14','Compra de IVA','Si','S','Si','Si','S','A','1.01.03.02.01'),(524,'3-43','Festejo dia del trabajador','Si','S','No','Si','No','A','4.11.01.01.11'),(525,'','','No','E','No','No','No','A',NULL),(526,'39-14','Renovacion de Reg.de Firmas en Aduana','Si','S','Si','Si','S','G','4.11.01.07.18'),(527,'174','Registro Industrial','No','S','No','Si','No','G',NULL),(528,'174-1','Gastos de Registro Industrial (MIC)','Si','S','No','No','No','G','4.13.01.08.26'),(529,'16-10','Estudio de Mercado','Si','S','No','Si','No','A','4.11.01.04.01'),(530,'3-44','Linea de Credito','Si','S','No','Si','No','A','1'),(531,'1-7','Anticipo de Clientes','No','E','No','No','No','A',''),(532,'22-29','Homologacion de Contrato','Si','S','No','Si','No','A','4.13.01.03.07'),(533,'111-5','Dividendos Jose Yunis','Si','S','No','Si','S','G','1.01.15.04.04'),(534,'111-6','Dividendos Ricardo Yunis','Si','S','No','Si','S','G','1.01.15.04.05'),(535,'121-3','Aso. Confeccionistas del Py','Si','S','No','Si','No','P','4.13.01.08.27'),(536,'21-15','Impuesto a la Construccion','Si','S','No','Si','No','A','4.13.10'),(537,'121-4','Nilsa Boutique','Si','S','No','No','No','A','2.01.01.04.845'),(538,'21-16','Tasas Judiciales','Si','S','No','Si','No','G','4.13.10'),(539,'22-30','Analisis de tejidos (INTN)','Si','S','No','Si','No','G','4.13.01.02');
+
+/*Table structure for table `mnt_caja_con` */
+
+DROP TABLE IF EXISTS `mnt_caja_con`;
+
+CREATE TABLE `mnt_caja_con` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cc_cod` varchar(2) DEFAULT NULL,
+  `cc_descri` varchar(40) DEFAULT NULL,
+  `cc_oper` varchar(1) DEFAULT NULL,
+  `cc_autom` varchar(2) DEFAULT NULL,
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `cc_cod` (`cc_cod`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*Data for the table `mnt_caja_con` */
+
+/* Trigger structure for table `asientos_det` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `update_corr_saldos` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `update_corr_saldos` BEFORE UPDATE ON `asientos_det` FOR EACH ROW BEGIN
+    IF(NEW.codigo <> OLD.codigo) THEN
+         INSERT INTO aux_cuentas(codigo,fecha,suc)  VALUES(old.codigo,old.fecha,old.suc);
+         INSERT INTO aux_cuentas(codigo,fecha,suc)  VALUES(new.codigo,new.fecha,new.suc);
+    END IF;     
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `caja_chica_mov` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `actualizar_saldo_caja_chica` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `actualizar_saldo_caja_chica` AFTER INSERT ON `caja_chica_mov` FOR EACH ROW BEGIN
+     DECLARE TMP INTEGER;
+     SELECT act_saldo_caja_chica( NEW.cj_ref_chi) INTO TMP;
+     IF (NEW.entrada_ref > 0) THEN
+	   SELECT  asiento_caja_chica(NEW.__local,NEW.concepto,'E',NEW.compl ,  NEW.entrada_ref ) INTO TMP;
+	   	 	             
+	ELSE 
+	   SELECT  asiento_caja_chica(NEW.__local,NEW.concepto,'S',NEW.compl , NEW.salida_ref ) INTO TMP;	 
+        END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `caja_chica_mov` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `update_gasto` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `update_gasto` AFTER UPDATE ON `caja_chica_mov` FOR EACH ROW BEGIN
+      IF ( ( NEW.concepto <> OLD.concepto ) OR (NEW.compl <> OLD.compl) ) THEN
+           UPDATE gastos SET g_con = NEW.concepto,g_compl = NEW.compl, g_con_n = NEW.subc_nombre WHERE g_con = OLD.concepto AND g_compl = OLD.compl AND g_monto = OLD.monto;	            
+      END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `caja_chica_mov` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `delete_gasto` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `delete_gasto` AFTER DELETE ON `caja_chica_mov` FOR EACH ROW BEGIN
+       
+      DELETE FROM gastos WHERE g_con = OLD.concepto AND g_compl = OLD.compl AND g_monto = OLD.monto;	            
+      
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `caja_con` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `cambio_nombre` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `cambio_nombre` AFTER UPDATE ON `caja_con` FOR EACH ROW BEGIN
+        UPDATE gastos SET g_con_n = NEW.cjc_descri WHERE   g_con_n = old.cjc_descri;      
+       
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `cuotas` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `actualiza_pagares` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `actualiza_pagares` BEFORE UPDATE ON `cuotas` FOR EACH ROW BEGIN
+	IF NEW.ct_estado = 'Cancelada' THEN
+	 
+	 UPDATE pagares SET pg_estado = 'Cancelado', pg_entregado = OLD.ct_entrega, pg_saldo = OLD.rest WHERE pg_ref = OLD.ct_ref AND pg_nro = OLD.ct_nro;
+	 
+	ELSE 
+	 UPDATE pagares SET pg_estado = 'Pendiente', pg_entregado = OLD.ct_entrega, pg_saldo = OLD.rest WHERE pg_ref = OLD.ct_ref AND pg_nro = OLD.ct_nro;
+        END IF;	 
+        END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `factura` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `factura_conv_change` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `factura_conv_change` AFTER UPDATE ON `factura` FOR EACH ROW BEGIN
+       DECLARE NRO_CONV INTEGER;
+       DECLARE TIPO VARCHAR(40);
+        
+       IF new.fact_conv <> old.fact_conv THEN
+          
+		SELECT conv_cod, conv_tipo FROM mnt_conv WHERE conv_cod = new.fact_conv INTO NRO_CONV, TIPO;
+          UPDATE fact_detalle_pg f  SET f.dp_conv = NRO_CONV, f.dp_conv_tipo = TIPO, dp_cuentas = '01107052043', dp_nro_orden =  new.fact_nro_orden WHERE  f.dp_fact_nro = old.fact_nro;
+       END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `mnt_cli` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `uupper` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `uupper` BEFORE INSERT ON `mnt_cli` FOR EACH ROW BEGIN
+        SET NEW.cli_fullname = TRIM(UPPER(NEW.cli_fullname));
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `mnt_cli` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `func_fullname_fact` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `func_fullname_fact` AFTER UPDATE ON `mnt_cli` FOR EACH ROW BEGIN
+	 IF NEW.cli_fullname <> OLD.cli_fullname THEN
+	   UPDATE factura SET fact_nom_cli = NEW.cli_fullname WHERE fact_cli_ci = OLD.cli_ci;
+	   UPDATE cuotas  SET ct_deudor = NEW.cli_fullname WHERE ct_ci = OLD.cli_ci;
+	 END IF;
+	 
+	 IF NEW.cli_ci <> OLD.cli_ci THEN
+	   UPDATE factura SET fact_cli_ci = NEW.cli_ci WHERE fact_cli_ci = OLD.cli_ci;
+	   UPDATE cuotas  SET ct_ci = NEW.cli_ci WHERE ct_ci = OLD.cli_ci;
+	 END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `mnt_color` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `actualiza_colores` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `actualiza_colores` AFTER UPDATE ON `mnt_color` FOR EACH ROW BEGIN
+          UPDATE mnt_prod SET p_color = new.c_cod where p_color = old.c_cod; 
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `p_users` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `p_user_ins_gen_pass` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `p_user_ins_gen_pass` BEFORE INSERT ON `p_users` FOR EACH ROW BEGIN
+      set new.password = '1$Tc8scfZR5OU';
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `p_users` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `cambiar_local_func` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'plus'@'localhost' */ /*!50003 TRIGGER `cambiar_local_func` AFTER UPDATE ON `p_users` FOR EACH ROW BEGIN
+        IF NEW.local <> OLD.local THEN
+           UPDATE mnt_func SET func_lugar_trab = NEW.local WHERE func_cod = OLD.name;
+        END IF; 
+    END */$$
+
+
+DELIMITER ;
+
+/* Function  structure for function  `abrir_factura` */
+
+/*!50003 DROP FUNCTION IF EXISTS `abrir_factura` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`plus`@`localhost` FUNCTION `abrir_factura`(nro integer, usuario varchar(60)) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+DECLARE TMP INTEGER;
+update det_factura set df_subtotal=(df_cantidad*df_precio) where df_fact_num = nro;
+update factura set fact_estado = 'Abierta', fact_empaque = 'No' where fact_nro = nro;
+SELECT makeLog_('Abrir Factura',concat(nro,''),usuario) INTO TMP;
+RETURN 1;
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `acredita_saldo_cc` */
+
+/*!50003 DROP FUNCTION IF EXISTS `acredita_saldo_cc` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`plus`@`localhost` FUNCTION `acredita_saldo_cc`(IDENT integer,cc_monto double(12,2), cc_cc varchar(25),cc_concepto varchar(100) ) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+DECLARE TMP INTEGER;
+ 
+ SELECT bcos_ins_asiento(cc_cc, current_date, '1-5',cc_concepto, cc_monto, 0) INTO TMP;
+ 
+RETURN 1;
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `actualizacion_anual` */
+
+/*!50003 DROP FUNCTION IF EXISTS `actualizacion_anual` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`plus`@`localhost` FUNCTION `actualizacion_anual`() RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+DECLARE FLAG INT;
+SELECT CURRENT_DATE >= desde FROM temp into FLAG;
+  IF (FLAG > 0) THEN
+    # UPDATE __autonum__ set p_cod = 1;
+     UPDATE temp SET desde = '2015-01-01';
+     RETURN 1;
+  END IF; 
+  RETURN 0;
+END */$$
+DELIMITER ;
+
+/* Function  structure for function  `actualizar_desc` */
+
+/*!50003 DROP FUNCTION IF EXISTS `actualizar_desc` */;
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`plus`@`localhost` FUNCTION `actualizar_desc`(func_code varchar(8), descuento integer) RETURNS int(11)
+    DETERMINISTIC
+BEGIN
+ UPDATE  mnt_func set func_deuda_desc = func_deuda_desc - descuento  where func_cod = func_code; 
+return 1;
+END */$$
+DELIMITER ;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

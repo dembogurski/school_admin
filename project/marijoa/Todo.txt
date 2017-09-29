@@ -1,0 +1,93 @@
+________________________________________________________________
+
+Autor: 		Douglas A. Dembogurski Feix
+Description:	Cosas que se deben hacer
+Fecha:		02-10-2007
+Las Update :    10-12-2007
+
+________________________________________________________________
+
+* Se solicita hacer ventana para consolidar cajas de sucursales
+
+Preguntar 
+
+¿Tesorería como exactamente funciona? Si (Solucionado)
+Se puede decir que la Tesorería es una caja mas? (Si Solucionado)
+Consolidación de caja serría pasar dinero de una sucursal a la otra que es Tesorería? (Si Solucionado)
+Que es lo que yo muestro exactamente en un reporte o planilla de convenios? (Respuestas erroneas El reporte se hizo mal 
+Solucionado en 2da vuelta por deduccion)
+
+Como exactamente tiene que tener la ventana de donde se manejará los pagos del dia de la fecha?
+(Solucionado Para UI Cobros y UI Pagos Ver FAct. Prov Cuentas a pagar Y Fact. Clitnes Cuentas a Cobrar)
+
+ejmplo 
+
+Mostrar todas las cuotas que se deben pagar hoy 
+todos los cheques que se deben pagar hoy (Solucionado)
+etc.
+
+
+
+Una factura a credito se cerraría cuando se termina de pagar? ( No )
+Que estado le pongo mientras este en proceso de pago? (Pendiente  Falta Rutina
+para cambio de pendiente a cancelada cuando se termina la ultima cuota, pagare o lo que fuere)
+
+
+1-++ Actualizar caja cuando se hace un pago adelantado y mov_caja 
+2- Verificar no hay mas transacciones de este tipo
+3- En la liquidacion de sueldos la fecha esta al revez (Aun no arreglado)
+
+
+ 
+
+// Pedidos de Cambios de Parte de Marijoa
+* Que funcione impresion de cheques (Solucionado)
+* Que funcione impresion de codigos de barras (Solucionado)
+* Que funione Translados y que quede registrado el/los Usuarios que generan y reciben el translado (Solucionado)
+* Sueldos Adelantos/Generar Amortisaciones por Adelantos E individual (Solucionado)
+* Ventana Poder Ver Detalle de Movimientos (Adelantos/Retiros/Sueldos/Descuentos/ETC) de Todos los Funcionarios 
+* (Solamente el Administrador o Contador) (Solucionado)
+* Ventana para que los Usuarios puedan Ver sus Movimientos (Adelantos/Retiros/Sueldos/Descuentos/ETC) (Solucionado)
+* Ventana para impresion de Liquidaciones (Solucionado)
+* Generar Amortizaciones por Descuentos (No contemplado) e Individual (Solucionado)
+  
+* Ventana en donde el contador/admin pueda ver todas las cuentas a pagar por rango de fecha o en el dia (Solucionado)
+* Ventana en donde el contador/admin pueda ver todas las cuentas a cobrar por rango de fecha o en el dia  (Solucionado)
+*
+* Agregar mas Grupos de Usuarios de los que habia porque Zulma no es solamente Perteneciente a Stock (Solucionado)
+* Poder agregar Usuarios (Solucionado)	
+* Que el Admin pueda cambiar contraseña de los Usuarios (Recomendado solo despues de crear un usuario nuevo) (Solucionado)
+* Poder hacer devoluciones de Productos (Solucionado) 
+* Poder cargar un detalle de factura con motivo de devolucion (Solucionado)
+* Permitir venta de productos que estan en la sucursal en la que esta el vendedor  (Solucionado) 
+* Migracion manual de conceptos de caja
+* Poder filtrar las cuotas a pagar y pagares por proveedor (Solucionado) 
+* Generar Nota de Credito (No contemplado)
+* Que se pueda borrar las amortizaciones por Adelantos  desde un Nº inicial hasta un Nº final (No contemplado) (Solucionado)
+* Que se pueda borrar las amortizaciones por Descuentos desde un Nº inicial hasta un Nº final (No contemplado) (Solucionado)
+* Se asignaron mas permisos de los pedidos a Zulma y a Jorge con relacion a la lista que dio Ricardo.
+
+
+
+
+
+Para Marijoa Post instalacion
+--------------------------------------------------------------------------------------------------------
+1-Obligarle a todos los funcionarios a cambiar su contraseña que es marijoa
+2-Agregar Nº de Cedula de los funcionarios en Mantenimiento --> Diversos --> Funcionarios/Cleintes (Corregir todos los datos)
+3-Corregir los codigos de Familias de productos ya sea creando nuevos y borrando los erroneos
+4-Completar los datos de Clientes 
+5-Arreglar en Mantenimiento -->administrativos->Meses y Dias Habiles
+6-Cargar Convenios con los que se cuenta
+7-Cargar el Resto de los bancos
+
+
+
+
+
+
+
+
+
+
+

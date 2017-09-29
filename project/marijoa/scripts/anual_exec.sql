@@ -1,0 +1,2 @@
+SELECT actualizacion_anual();
+

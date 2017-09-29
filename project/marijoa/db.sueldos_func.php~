@@ -1,0 +1,628 @@
+<?php
+$Obj->name = "sueldos_func";
+$Obj->alias = "Pago de sueldos y comisiones";
+$Obj->help = "Pago de sueldos y comisiones de funcionarios";
+$Obj->copy_from = "";
+$Obj->Inheritance = "";
+$Obj->File = "sueldos_func";
+$Obj->Filter = "";
+$Obj->Sort = "id desc";
+$Obj->p_insert = "";
+$Obj->p_change = "";
+$Obj->p_delete = "";
+$Obj->Zebra = "white,lightblue";
+$Obj->Noedit = "";
+$Obj->NoInsert = "";
+$Obj->Limit = "";
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_bloqueo",
+        F_ALIAS_ => "Bloquea el boton insert",
+        F_HELP_ => "Bloquea el boton insert",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "2",
+        C_SHOW_ => "sue_bloqueo.firstSQL",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "disableAcceptButton()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_fecha",
+        F_ALIAS_ => "Fecha",
+        F_HELP_ => "Fecha en que se realiza la operación",
+        F_TYPE_ => "date",
+        F_LENGTH_ => "10",
+        F_BROW_ => "1",
+        F_REQUIRED_ => "1",
+        F_ORD_ => "5",
+        V_DEFAULT_ => "thisDate_",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_localidad",
+        F_ALIAS_ => "Obtiene la localidad del usuario actual",
+        F_HELP_ => "Obtiene la localidad del usuario actual",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select p.local from p_users p where name =|{'+p_user_+'}|'",
+        F_QUERY_REF_ => "sue_localidad.firstSQL",
+        F_SHOWFIELD_ => "emp_cod,emp_nombre",
+        F_NODB_ => "1",
+        F_ORD_ => "7",
+        C_VIEW_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_mes",
+        F_ALIAS_ => "Mes",
+        F_HELP_ => "Mes en cuestion para liquidación de sueldo.",
+        F_TYPE_ => "select_list",
+        F_RELTABLE_ => "meses",
+        F_SHOWFIELD_ => "m_code,m_mes",
+        F_LOCALFIELD_ => " ",
+        F_REQUIRED_ => "1",
+        F_ORD_ => "8",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "anio",
+        F_ALIAS_ => "Año",
+        F_HELP_ => "Año",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select LEFT(CURRENT_DATE,4)'",
+        F_QUERY_REF_ => "anio.firstSQL",
+        F_LENGTH_ => "5",
+        F_DEC_ => "0",
+        F_NODB_ => "1",
+        F_ORD_ => "8",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_dias_hab",
+        F_ALIAS_ => "Dias Hábiles",
+        F_HELP_ => "Cantidad de dias hábiles para este mes",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select m_dias_habiles from meses where m_code ='+sue_mes.getVal()+''",
+        F_QUERY_REF_ => "sue_mes.hasChanged()||sue_mes.onChange()",
+        F_RELFIELD_ => " ",
+        F_LOCALFIELD_ => " ",
+        F_LENGTH_ => "3",
+        F_REQUIRED_ => "1",
+        F_ORD_ => "9",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_buscar_func",
+        F_ALIAS_ => "Buscar Funcionario",
+        F_HELP_ => "Busca el Funcionario ",
+        F_TYPE_ => "text",
+        F_LENGTH_ => "25",
+        F_NODB_ => "1",
+        F_ORD_ => "10",
+        C_VIEW_ => "operation==INSERT_",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_cod_func",
+        F_ALIAS_ => "Funcionario",
+        F_HELP_ => "Código y nombre completo del funcionario",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => "el['sue_buscar_func'].hasChanged()",
+        F_RELTABLE_ => "mnt_func",
+        F_SHOWFIELD_ => "func_fullname",
+        F_FILTER_ => "'func_fullname LIKE |{%'+el['sue_buscar_func'].get()+'%}|'",
+        F_LENGTH_ => "30",
+        F_BROW_ => "1",
+        F_REQUIRED_ => "1",
+        F_ORD_ => "20",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_funcnombre",
+        F_ALIAS_ => "Nombre Completo",
+        F_HELP_ => "Nombre completo del funcionario",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT func_fullname from mnt_func where func_cod = '+sue_cod_func.getStr()",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()||operation==SHOW_",
+        F_LENGTH_ => "60",
+        F_NODB_ => "1",
+        F_ORD_ => "22",
+        C_VIEW_ => "operation==CHANGE_",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "65",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_ult_pago",
+        F_ALIAS_ => "Ultima fecha de Pago",
+        F_HELP_ => "Ultima Fecha en que se pago al funcionario",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT MAX(sue_fecha) FROM sueldos_func WHERE sue_cod_func = '+sue_cod_func.getStr()+''",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&&sue_cod_func.get()!=''",
+        F_LENGTH_ => "10",
+        F_BROW_ => "1",
+        F_ORD_ => "25",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_retiros",
+        F_ALIAS_ => "Retiros de este Mes",
+        F_HELP_ => "Retiros o pagos adelantados al funcionario",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select sum(sue_total) from sueldos_func where sue_cod_func = '+sue_cod_func.getStr()+' and sue_mes ='+sue_mes.getVal()+' and sue_fecha like |{'+anio.get()+'%}|'",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&&sue_cod_func.get()!=''",
+        F_LENGTH_ => "14",
+        F_DEC_ => "2",
+        F_NODB_ => "1",
+        F_ORD_ => "26",
+        C_VIEW_ => "sue_buscar_func.get()!=''",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_det_retiros",
+        F_ALIAS_ => "Detalle de Retiros",
+        F_HELP_ => "Detalle de Retiros",
+        F_TYPE_ => "subform",
+        F_OPTIONS_ => "'sue_mes='+sue_mes.get()+' and sue_cod_func='+sue_cod_func.getStr()+''",
+        F_LINK_ => "db.sue_func_retiros",
+        F_SEND_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "27",
+        C_VIEW_ => "sue_cod_func.get()!=''&&sue_mes.getVal()>0",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_lugar_trab",
+        F_ALIAS_ => "Sucursal en que trabaja",
+        F_HELP_ => "Sucursal en que trabaja el funcionario",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select func_lugar_trab from mnt_func where func_cod = '+ el['sue_cod_func'].getStr()",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()",
+        F_LENGTH_ => "10",
+        F_NODB_ => "1",
+        F_ORD_ => "28",
+        C_VIEW_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_sum_comi",
+        F_ALIAS_ => "Total Comisiones",
+        F_HELP_ => "Total Comisiones",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT sum(fact_comi_vend) from factura where fact_estado_com = |{false}| and fact_vend_cod =  '+el['sue_cod_func'].getStr()+' and fact_estado =|{Cerrada}| and fact_fecha like |{'+anio.get()+'%}| and fact_fecha like |{%-'+sue_mes.get()+'-%}|' ",
+        F_QUERY_REF_ => "(sue_mes.hasChanged()||anio.hasChanged()||sue_cod_func.hasChanged())&&sue_cod_func.get()!='' ",
+        F_LENGTH_ => "12",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "30",
+        V_DEFAULT_ => "0",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_extras",
+        F_ALIAS_ => "Extras",
+        F_HELP_ => "Extras",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select sum(desc_monto) from func_ingresos  where desc_func_cod = '+sue_cod_func.getStr()+' and desc_estado = |{Pendiente}|'",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&&sue_cod_func.get()!=''",
+        F_LENGTH_ => "12",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "35",
+        C_VIEW_ => "true",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_desc_actual",
+        F_ALIAS_ => "Descuentos ",
+        F_HELP_ => "Solo el 1º Descuento en contra del funcionario",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select desc_monto from sue_descuentos where desc_func_cod = '+sue_cod_func.getStr()+' and desc_estado = |{Pendiente}| order by desc_orden asc limit 1'",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&&sue_cod_func.get()!=''",
+        F_LENGTH_ => "12",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "38",
+        V_DEFAULT_ => "0",
+        C_VIEW_ => "true",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_adelantos",
+        F_ALIAS_ => "Adelantos",
+        F_HELP_ => "Adelantos",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select desc_monto from pagos_adelantados where desc_func_cod = '+sue_cod_func.getStr()+' and desc_estado = |{Pendiente}| order by nro_orden asc limit 1' ",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&&sue_cod_func.get()!=''",
+        F_LENGTH_ => "12",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "39",
+        C_VIEW_ => "true",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_sueldo",
+        F_ALIAS_ => "Sueldo",
+        F_HELP_ => "Sueldo del empleado",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT func_sueldo from mnt_func where func_cod ='+el['sue_cod_func'].getStr()+''",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&& sue_cod_func.get()!=''",
+        F_LENGTH_ => "12",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "40",
+        V_DEFAULT_ => "0",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_ips",
+        F_ALIAS_ => "I.P.S.",
+        F_HELP_ => "I.P.S. Instituto de Previsión Social",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT func_ips from mnt_func where func_cod ='+el['sue_cod_func'].getStr()+''",
+        F_QUERY_REF_ => "sue_cod_func.hasChanged()&& sue_cod_func.get()!=''",
+        F_LENGTH_ => "10",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "41",
+        C_VIEW_ => "true",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_dias_trab",
+        F_ALIAS_ => "Dias Trabajados",
+        F_HELP_ => "Cantidad de dias trabajados que se desea pagar",
+        F_TYPE_ => "text",
+        F_LENGTH_ => "3",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "45",
+        F_POSVAL_ => "sue_dias_trab.getVal()<=sue_dias_hab.getVal()",
+        F_MESSAGE_ => "'Los dias trabajados no pueden ser mayor a los dias habiles!!! '",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_total",
+        F_ALIAS_ => "Total ",
+        F_HELP_ => "Total Sueldo + Comision",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "14",
+        F_DEC_ => "0",
+        F_BROW_ => "1",
+        F_ORD_ => "50",
+        V_DEFAULT_ => "0",
+        C_SHOW_ => "(sue_sueldo.get()!=''||sue_sum_comi.get()!='')",
+        F_FORMULA_ => "((((((sue_sueldo.getVal() / sue_dias_hab.getVal() ) * sue_dias_trab.getVal() ) + sue_sum_comi.getVal() ) - sue_desc_actual.getVal() ) - sue_adelantos.getVal()) + sue_extras.getVal() ) - sue_ips.getVal()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "discriminado",
+        F_ALIAS_ => "Discriminado",
+        F_HELP_ => "Discriminado",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "51",
+        F_INLINE_ => "1",
+        F_FORMULA_ => "sue_total.getVal()+sue_adelantos.getVal()+sue_desc_actual.getVal()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_cj_bco",
+        F_ALIAS_ => "Forma de Pago",
+        F_HELP_ => "Forma de Pago",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "Caja,Banco",
+        F_NODB_ => "1",
+        F_ORD_ => "52",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_cj",
+        F_ALIAS_ => "Caja de SUC:",
+        F_HELP_ => "Caja de SUC:",
+        F_TYPE_ => "select_list",
+        F_RELTABLE_ => "par_empresas",
+        F_SHOWFIELD_ => "emp_cod,emp_nombre",
+        F_NODB_ => "1",
+        F_ORD_ => "53",
+        F_INLINE_ => "1",
+        C_SHOW_ => "sue_cj_bco.get()=='Caja'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "bco",
+        F_ALIAS_ => "Banco",
+        F_HELP_ => "Banco",
+        F_TYPE_ => "select_list",
+        F_RELTABLE_ => "bcos",
+        F_SHOWFIELD_ => "b_cod,b_nombre",
+        F_NODB_ => "1",
+        F_ORD_ => "54",
+        F_INLINE_ => "1",
+        C_SHOW_ => "sue_cj_bco.get()=='Banco'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "cta",
+        F_ALIAS_ => "Cuenta",
+        F_HELP_ => "Cuenta",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => "bco.hasChanged()",
+        F_RELTABLE_ => "bcos_ctas",
+        F_SHOWFIELD_ => "cta_num,cta_moneda",
+        F_LOCALFIELD_ => "dif",
+        F_FILTER_ => "'cta_bco='+bco.getStr()",
+        F_LENGTH_ => "20",
+        F_NODB_ => "1",
+        F_ORD_ => "55",
+        F_INLINE_ => "1",
+        C_SHOW_ => "sue_cj_bco.get()=='Banco'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_cj_ref",
+        F_ALIAS_ => "Caja Ref",
+        F_HELP_ => "Caja Ref",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select cj_ref from caja where cj_estado = |{Abierto}| and cj_fecha = current_date and cj_empr = '+sue_cj.getStr()+' order by id desc limit 1'",
+        F_QUERY_REF_ => "sue_cj.hasChanged()",
+        F_NODB_ => "1",
+        F_ORD_ => "56",
+        C_SHOW_ => "sue_cj.notEmpty()",
+        C_VIEW_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "100",
+        F_NODB_ => "1",
+        F_ORD_ => "57",
+        C_SHOW_ => "sue_cj_ref.get()=='__NO DATA__'",
+        F_FORMULA_ => "'( ! ) No hay referencia de caja Abierta para el dia de la fecha. Favor Abrir Primero!!!'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_habilitar",
+        F_ALIAS_ => "Pagar sueldo",
+        F_HELP_ => "Pagar sueldo",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "No,Si",
+        F_NODB_ => "1",
+        F_ORD_ => "70",
+        C_SHOW_ => "sue_cod_func.get()!=''&&sue_total.getVal()>0 && sue_cj_ref.get()!='__NO DATA__'",
+        C_VIEW_ => "sue_dias_trab.getVal()<=sue_dias_hab.getVal()&&operation!=CHANGE_",
+        F_POSVAL_ => "( (sue_total.getVal()-sue_sum_comi.getVal()) + sue_retiros.getVal()) <= sue_sueldo.getVal()",
+        F_MESSAGE_ => "'ATENCION!!! El monto de retiros es mayor al sueldo del funcionario!!!' ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_nro_liquid",
+        F_ALIAS_ => "Nº de Liquidación",
+        F_HELP_ => "Nº de Liquidación",
+        F_TYPE_ => "text",
+        F_AUTONUM_ => "1",
+        F_LENGTH_ => "6",
+        F_BROW_ => "1",
+        F_ORD_ => "80",
+        C_VIEW_ => "false",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_confirmar",
+        F_ALIAS_ => "Confirmar Pago (CAJA)",
+        F_HELP_ => "Confirmar Pago Caja",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'SELECT pagar_sueldo('+sue_cod_func.getStr()+','+sue_sum_comi.getVal()+','+sue_sueldo.getVal()+','+sue_total.getVal()+'  ,'+ sue_ult_pago.getStr()+','+sue_lugar_trab.getStr() +','+sue_cj.getStr()+','+sue_dias_hab.getVal()+','+sue_mes.getStr()+','+sue_dias_trab.getVal()+','+sue_nro_liquid.getVal()+', '+sue_desc_actual.getVal()+','+sue_adelantos.getVal()+','+sue_extras.getVal()+','+sue_ips.getVal()+','+sue_cj_ref.getVal()+')'",
+        F_NODB_ => "1",
+        F_ORD_ => "83",
+        C_SHOW_ => "(sue_habilitar.get()=='Si'&&sue_cj_bco.get()=='Caja' )&&!sue_proc.get()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_confirmar_b",
+        F_ALIAS_ => "Confirmar Pago (BANCO)",
+        F_HELP_ => "Confirmar Pago Cuenta Corriente",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'SELECT pagar_suelo_bco('+sue_cod_func.getStr()+','+sue_sum_comi.getVal()+','+sue_sueldo.getVal()+','+sue_total.getVal()+'  ,'+ sue_ult_pago.getStr()+','+sue_lugar_trab.getStr() +','+sue_localidad.getStr()+','+sue_dias_hab.getVal()+','+sue_mes.getStr()+','+sue_dias_trab.getVal()+','+sue_nro_liquid.getVal()+', '+sue_desc_actual.getVal()+','+sue_adelantos.getVal()+','+sue_extras.getVal()+','+sue_ips.getVal()+','+cta.getStr()+')'",
+        F_NODB_ => "1",
+        F_ORD_ => "84",
+        C_SHOW_ => "(sue_habilitar.get()=='Si'&&sue_cj_bco.get()=='Banco'  )&&!sue_proc.get()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_proc",
+        F_ALIAS_ => "LLamar a procedimiento",
+        F_HELP_ => "Llama al procedimiento pagar_sueldos",
+        F_TYPE_ => "formula",
+        F_QUERY_ => " ",
+        F_NODB_ => "1",
+        F_ORD_ => "85",
+        C_VIEW_ => "false",
+        C_CHANGE_ => "false",
+        F_MESSAGE_ => " ",
+        F_FORMULA_ => "sue_confirmar.get()||sue_confirmar_b.get()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_inprimir",
+        F_ALIAS_ => "                    Imprimir liquidacion                    ",
+        F_HELP_ => "Imprime la liquidacion actual",
+        F_TYPE_ => "report",
+        F_REPORT_ => "rep.liquid_sueldo",
+        F_NODB_ => "1",
+        F_ORD_ => "93",
+        C_VIEW_ => "sue_proc.get()||operation==CHANGE_",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_pagar_otro",
+        F_ALIAS_ => "          Siguiente liquidacion --->          ",
+        F_HELP_ => "Siguiente liquidacion",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'select count(*) from mnt_func'",
+        F_BROW_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "103",
+        F_INLINE_ => "1",
+        C_VIEW_ => "sue_proc.get()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_msg",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje de pago pago exitoso!!! ",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "113",
+        C_SHOW_ => "sue_proc.hasChanged()",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "enableMessageButton('Pago de Sueldo registrado con exito!!!',3000);",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_reload",
+        F_ALIAS_ => "Recargar la pagina",
+        F_HELP_ => "Recarga la pagina",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "123",
+        C_SHOW_ => "sue_pagar_otro.get()",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "setTimeout('window.location.reload()',300);",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "sue_forma",
+        F_ALIAS_ => "Caja/Banco",
+        F_HELP_ => "Caja/Banco",
+        F_TYPE_ => "text",
+        F_ORD_ => "133",
+        C_VIEW_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__gasto",
+        F_ALIAS_ => "Registra gasto",
+        F_HELP_ => "Registra gasto",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select gasto('+sue_lugar_trab.getStr()+',|{'+p_user_+'}|,'+discriminado.getVal()+',|{ADMINISTRACION}|,|{3}|,'+sue_cod_func.getStr()+',|{Si}|)'",
+        F_QUERY_REF_ => "(sue_confirmar.get()||sue_confirmar_b.get())&&__gasto.firstSQL",
+        F_NODB_ => "1",
+        F_ORD_ => "143",
+        C_VIEW_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+?>

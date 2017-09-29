@@ -1,0 +1,699 @@
+<?php
+$Obj->name = "pedido_ab_xsuc";
+$Obj->alias = "Pedidos Abiertos de Esta Sucursal";
+$Obj->help = "Pedidos Abiertos de Esta Sucursal";
+$Obj->copy_from = "";
+$Obj->Inheritance = "";
+$Obj->File = "tmp";
+$Obj->Filter = "";
+$Obj->Sort = "";
+$Obj->p_insert = "";
+$Obj->p_change = "";
+$Obj->p_delete = "";
+$Obj->Zebra = "white,lightblue";
+$Obj->Noedit = "";
+$Obj->NoInsert = "1";
+$Obj->Limit = "";
+$Obj->Add(
+    array(
+        F_NAME_ => "__lock",
+        F_ALIAS_ => "Bloquea el boton Insert/Accept",
+        F_HELP_ => "Bloquea el boton Insert/Accept",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "2",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "disableAcceptButton()",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__user",
+        F_ALIAS_ => "Usuario",
+        F_HELP_ => "Codigo del usuario",
+        F_TYPE_ => "formula",
+        F_RELTABLE_ => "mnt_func",
+        F_NODB_ => "1",
+        F_ORD_ => "4",
+        C_VIEW_ => "false",
+        C_CHANGE_ => "false",
+        F_FORMULA_ => "p_user_",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__local",
+        F_ALIAS_ => "Sucursal",
+        F_HELP_ => "Obtiene la localidad del usuario actual",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select p.local from p_users p where name =|{'+p_user_+'}|'",
+        F_QUERY_REF_ => "__local.firstSQL",
+        F_RELTABLE_ => "p_users",
+        F_LENGTH_ => "3",
+        F_NODB_ => "1",
+        F_ORD_ => "10",
+        C_VIEW_ => "true",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__suc",
+        F_ALIAS_ => "Sucursal",
+        F_HELP_ => "Nombre de la Sucursal",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select emp_nombre from par_empresas where emp_cod like '+__local.getStr()",
+        F_QUERY_REF_ => "__local.hasChanged()||__suc.firstSQL",
+        F_RELTABLE_ => "par_empresas",
+        F_LENGTH_ => "24",
+        F_NODB_ => "1",
+        F_ORD_ => "20",
+        F_INLINE_ => "1",
+        C_SHOW_ => "__local.get()!=''",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__moveto",
+        F_ALIAS_ => "Moverme a",
+        F_HELP_ => "Moverme a",
+        F_TYPE_ => "select_list",
+        F_RELTABLE_ => "par_empresas",
+        F_SHOWFIELD_ => "emp_cod,emp_nombre",
+        F_NODB_ => "1",
+        F_ORD_ => "25",
+        F_INLINE_ => "1",
+        G_SHOW_ => "768",
+        G_CHANGE_ => "768"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "60",
+        F_NODB_ => "1",
+        F_ORD_ => "25",
+        F_FORMULA_ => "'( ! ) Resultado de filtros Máximo 50 Registros. % = comodin ' ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__movme",
+        F_ALIAS_ => "Transladarme",
+        F_HELP_ => "Transladarme",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'update p_users set  local = '+__moveto.getStr()+' where name = '+__user.getStr()",
+        F_BROW_ => "1",
+        F_ORD_ => "26",
+        F_INLINE_ => "1",
+        C_SHOW_ => "__local.get()!=__moveto.get()&&__moveto.get()!=''",
+        G_SHOW_ => "512",
+        G_CHANGE_ => "512"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "bcodigo",
+        F_ALIAS_ => "Código",
+        F_HELP_ => "Código",
+        F_TYPE_ => "text",
+        F_NODB_ => "1",
+        F_ORD_ => "26",
+        V_DEFAULT_ => "'%'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "fdp",
+        F_ALIAS_ => "Con Sin Fin de Pieza",
+        F_HELP_ => "Con Sin Fin de Pieza",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "No,Si,%",
+        F_LENGTH_ => "40",
+        F_NODB_ => "1",
+        F_ORD_ => "28",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "gr",
+        F_ALIAS_ => "Buscar Grupo",
+        F_HELP_ => "Grupo",
+        F_TYPE_ => "text",
+        F_LENGTH_ => "24",
+        F_NODB_ => "1",
+        F_ORD_ => "30",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "gru",
+        F_ALIAS_ => "Grupo",
+        F_HELP_ => "Grupo",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => "gr.hasChanged()",
+        F_OPTIONS_ => ",%",
+        F_RELTABLE_ => "mnt_grupo",
+        F_SHOWFIELD_ => "g_cod,''",
+        F_FILTER_ => "'g_cod like |{'+gr.get()+'%}|'",
+        F_REQUIRED_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "32",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "tp",
+        F_ALIAS_ => "Buscar Tipo",
+        F_HELP_ => "Tipo en que se usa",
+        F_TYPE_ => "text",
+        F_DSL_ => " ",
+        F_RELTABLE_ => "mnt_temp",
+        F_LENGTH_ => "24",
+        F_ORD_ => "40",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "tipo",
+        F_ALIAS_ => "Tipo   ",
+        F_HELP_ => "Tipo",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => "tp.hasChanged()",
+        F_OPTIONS_ => ",%",
+        F_RELTABLE_ => "mnt_tipo",
+        F_SHOWFIELD_ => "t_cod,''",
+        F_FILTER_ => "'t_cod like |{'+tp.get()+'%}|'",
+        F_LENGTH_ => "40",
+        F_REQUIRED_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "41",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "clr",
+        F_ALIAS_ => "Buscar Color",
+        F_HELP_ => "Color al que pertenece",
+        F_TYPE_ => "text",
+        F_LENGTH_ => "24",
+        F_NODB_ => "1",
+        F_ORD_ => "45",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "color",
+        F_ALIAS_ => "Color ",
+        F_HELP_ => "Color",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => "clr.hasChanged()",
+        F_OPTIONS_ => "%",
+        F_RELTABLE_ => "mnt_color",
+        F_SHOWFIELD_ => "c_cod,''",
+        F_FILTER_ => "'c_cod like |{'+clr.get()+'%}|'",
+        F_LENGTH_ => "40",
+        F_REQUIRED_ => "1",
+        F_NODB_ => "1",
+        F_ORD_ => "46",
+        F_INLINE_ => "1",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg20",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "40",
+        F_NODB_ => "1",
+        F_ORD_ => "50",
+        F_INLINE_ => "1",
+        C_SHOW_ => "__local.get()==__moveto.get()",
+        F_FORMULA_ => "'( ! ) Ya estas ahi TORPE!!! :P '",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "s",
+        F_ALIAS_ => "Sucursal",
+        F_HELP_ => "Sucursal",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "%",
+        F_RELTABLE_ => "par_empresas",
+        F_SHOWFIELD_ => "emp_cod,emp_nombre",
+        F_FILTER_ => "'emp_cod <> '+__local.getStr()",
+        F_NODB_ => "1",
+        F_ORD_ => "54",
+        C_SHOW_ => "__local.get()!=''",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg2",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "50",
+        F_NODB_ => "1",
+        F_ORD_ => "56",
+        F_INLINE_ => "1",
+        C_VIEW_ => "s.get()==__local.get()",
+        F_FORMULA_ => "'( ! ) Estas buscando tu propia sucursal!!!' ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "check",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "6",
+        F_NODB_ => "1",
+        F_ORD_ => "56",
+        F_INLINE_ => "1",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "if( s.get()==__local.get() ){1}else{0}",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "lcod",
+        F_ALIAS_ => "Codigos",
+        F_HELP_ => "Lista de codigos",
+        F_TYPE_ => "dynamic_select_list",
+        F_DSL_ => " gru.hasChanged()||tipo.hasChanged()||color.hasChanged()||s.hasChanged()||bcodigo.hasChanged()||fdp.hasChanged()",
+        F_RELTABLE_ => "mnt_prod",
+        F_SHOWFIELD_ => "p_cod,concat(p_grupo,|{ - }|,p_tipo,|{ - }|,p_color,|{ Mts.: }|,p_cant,|{ Suc: }|, p_local)",
+        F_FILTER_ => "'p_cod like |{'+bcodigo.get()+'%}|  and ( p_grupo like |{'+gru.get()+'%}| and p_tipo like |{'+tipo.get()+'%}| and p_color like |{'+color.get()+'%}| and p_local like |{'+s.get()+'}| and prod_fin_pieza like '+fdp.getStr()+') order by p_cant desc limit 50'",
+        F_NODB_ => "1",
+        F_ORD_ => "60",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "pprov",
+        F_ALIAS_ => "Solicitar de todas maneras al Proveedor",
+        F_HELP_ => "Solicitar de todas maneras al Proveedor",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "No,Si",
+        F_NODB_ => "1",
+        F_ORD_ => "65",
+        F_INLINE_ => "1",
+        C_SHOW_ => "lcod.getVal()>0||( lcod.getVal()<1&&gru.get()!=''&&tipo.get()!=''&&color.get()!='')",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "verif_prov",
+        F_ALIAS_ => "Cant. Pedidos identicos Pendientes",
+        F_HELP_ => "Chequeo de pedido duplicado",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT count(*) FROM nota_pedido n, nota_pedido_det d WHERE n.nro = d.nro_pedido AND n']_locald = |{PR}|  AND  n']_local LIKE  '+__local.getStr()+' AND n.estado = |{Pendiente}| AND d.estado LIKE |{Pendiente}|   AND d.grupo = '+gru.getStr()+' AND d.tipo = '+tipo.getStr()+' AND d.color = '+color.getStr()+''",
+        F_QUERY_REF_ => "pedido.hasChanged()||pprov.hasChanged()",
+        F_LENGTH_ => "6",
+        F_DEC_ => "0",
+        F_NODB_ => "1",
+        F_ORD_ => "65",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "msg5",
+        F_ALIAS_ => "( ! ) Mensaje!!! ",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "80",
+        F_NODB_ => "1",
+        F_ORD_ => "66",
+        C_SHOW_ => "pprov.get()=='Si'&& gru.get()!='%'&& tipo.get()!='%'&& color.get()!='%' && lcod.getVal()>0",
+        F_FORMULA_ => "'Para Pedir al proveedor favor rellene Grupo,Tipo y Color!!!'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "mts",
+        F_ALIAS_ => "Existencia",
+        F_HELP_ => "Existencia en Metros",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select p_cant from mnt_prod where p_cod = '+lcod.getStr()",
+        F_QUERY_REF_ => "lcod.hasChanged()&&lcod.get()!=''",
+        F_LENGTH_ => "11",
+        F_NODB_ => "1",
+        F_ORD_ => "70",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "lprod",
+        F_ALIAS_ => "Sucursal",
+        F_HELP_ => "Sucursal en donde se encuentra el producto",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select p_local from mnt_prod where p_cod = '+lcod.getStr()",
+        F_QUERY_REF_ => "lcod.hasChanged()",
+        F_LENGTH_ => "11",
+        F_NODB_ => "1",
+        F_ORD_ => "75",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "p_pend",
+        F_ALIAS_ => "Pedidos de este codigo",
+        F_HELP_ => "Pedidos Pendientes de este codigo",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select sum(cantidad) from nota_pedido_det d, nota_pedido p where p.nro = d.nro_pedido and  d.codigo = '+lcod.getStr()+' and p.estado = |{Pendiente}| and __locald <> |{PR}|'",
+        F_QUERY_REF_ => "lcod.hasChanged()",
+        F_LENGTH_ => "8",
+        F_NODB_ => "1",
+        F_ORD_ => "76",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "exis_pend",
+        F_ALIAS_ => "Disponibilidad",
+        F_HELP_ => "Disponibilidad",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "8",
+        F_NODB_ => "1",
+        F_ORD_ => "78",
+        F_INLINE_ => "1",
+        F_FORMULA_ => "if( mts.getVal() - p_pend.getVal() > 0 ){ mts.getVal() - p_pend.getVal() }else{ 0 }",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "investigar_ped",
+        F_ALIAS_ => "Quien pidio este Codigo?",
+        F_HELP_ => "Quien pidio este Codigo?",
+        F_TYPE_ => "report",
+        F_REPORT_ => "rep.nota_ped_x_cod",
+        F_NODB_ => "1",
+        F_ORD_ => "78",
+        F_INLINE_ => "1",
+        C_SHOW_ => "lcod.getVal()>0 ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "prods_simil",
+        F_ALIAS_ => "...",
+        F_HELP_ => "Ver Productos Similares",
+        F_TYPE_ => "report",
+        F_REPORT_ => "rep.prods_similares",
+        F_LENGTH_ => "2",
+        F_NODB_ => "1",
+        F_ORD_ => "78",
+        F_INLINE_ => "1",
+        C_SHOW_ => "existencia.getVal()>0&&lcod.getVal()>0 ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "nro_ped_pnd",
+        F_ALIAS_ => "Nro Pedido Abierto",
+        F_HELP_ => "Nro de Pedido Abierto hacia sucursal destino",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select nro  from nota_pedido where __local = '+__local.getStr()+' and __locald = '+lprod.getStr()+' and estado = |{Abierta}| and __user = |{'+p_user_+'}| '",
+        F_QUERY_REF_ => "lcod.hasChanged()||lprod.hasChanged()||(inserta.get())",
+        F_LENGTH_ => "12",
+        F_NODB_ => "1",
+        F_ORD_ => "79",
+        C_VIEW_ => "true",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "pedido",
+        F_ALIAS_ => "Metros a Pedir",
+        F_HELP_ => "Metros a Pedir",
+        F_TYPE_ => "text",
+        F_LENGTH_ => "10",
+        F_DEC_ => "2",
+        F_NODB_ => "1",
+        F_ORD_ => "80",
+        C_VIEW_ => "(check.getVal()<1&&exis_pend.getVal()>0)||lprod.get()=='__NO DATA__'||pprov.get()=='Si'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "remito",
+        F_ALIAS_ => "Remision",
+        F_HELP_ => "Verifica si se encuentra en remision",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT CONCAT(|{En Remision  }|, r.rem_estado ,|{  Destino }|, r.rem_dir_destino,|{ Nro: }|,r.rem_nro) FROM nota_remision r, remito_det d WHERE r.rem_nro = d.rem_nro AND r.rem_estado <> |{Cerrada}| AND d.df_cod_prod = '+lcod.getVal()+' '",
+        F_QUERY_REF_ => "pedido.hasChanged()",
+        F_LENGTH_ => "60",
+        F_NODB_ => "1",
+        F_ORD_ => "81",
+        F_INLINE_ => "1",
+        C_VIEW_ => "pedido.getVal()>0",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "notapedido",
+        F_ALIAS_ => "Nota Pedido",
+        F_HELP_ => "Verifica si se encuentra en Nota de Pedido",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT CONCAT(|{Nota de Pedido }|,n.estado,|{  }|,__user, |{  }|, fecha ) FROM nota_pedido n, nota_pedido_det d WHERE n.nro = d.nro_pedido AND n.estado <> |{Cerrada}| AND d.codigo = '+lcod.getVal()+' ORDER BY d.id DESC LIMIT 1 '",
+        F_QUERY_REF_ => "pedido.hasChanged()",
+        F_LENGTH_ => "60",
+        F_NODB_ => "1",
+        F_ORD_ => "81",
+        C_VIEW_ => "pedido.getVal()>0",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "existencia",
+        F_ALIAS_ => "Existencia similar en esta Sucursal",
+        F_HELP_ => "Existencia de Productos Similares en la Sucursal",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'SELECT cant_prod_simil('+lcod.getVal()+','+__local.getStr()+');'",
+        F_QUERY_REF_ => "pedido.hasChanged()",
+        F_LENGTH_ => "6",
+        F_DEC_ => "0",
+        F_NODB_ => "1",
+        F_ORD_ => "81",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "df_stad",
+        F_ALIAS_ => "Estadistica de Ventas",
+        F_HELP_ => "Estadistica de Ventas",
+        F_TYPE_ => "text",
+        F_MAKE_QUERY_ => "1",
+        F_QUERY_ => "'select calc_orient_remito('+lcod.getVal()+','+__local.getStr()+')'",
+        F_QUERY_REF_ => "pedido.hasChanged()&&lcod.getVal()>0",
+        F_LENGTH_ => "6",
+        F_DEC_ => "0",
+        F_NODB_ => "1",
+        F_ORD_ => "81",
+        F_INLINE_ => "1",
+        C_CHANGE_ => "false",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "urg",
+        F_ALIAS_ => "Marque 'Si' solamente si este pedido ha sido CONFIRMADO y es muy URGENTE!!! ",
+        F_HELP_ => "Marque 'Si' si este pedido es muy URGENTE!!!  ",
+        F_TYPE_ => "select_list",
+        F_OPTIONS_ => "No,Si",
+        F_NODB_ => "1",
+        F_ORD_ => "82",
+        F_INLINE_ => "1",
+        C_VIEW_ => "pedido.getVal()>0  ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg3",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "50",
+        F_NODB_ => "1",
+        F_ORD_ => "83",
+        F_INLINE_ => "1",
+        C_VIEW_ => "(pedido.getVal()>exis_pend.getVal()&&lcod.getVal()>0 ) && pprov.get()!='Si'",
+        F_FORMULA_ => "'( ! ) Pedido > a la Disponibilidad!!!' ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg4",
+        F_ALIAS_ => "( ! )",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "80",
+        F_NODB_ => "1",
+        F_ORD_ => "84",
+        C_VIEW_ => "(pedido.getVal()>0 && nro_ped_pnd.get()=='__NO DATA__' && lprod.get()!='__NO DATA__') && pprov.get()!='Si'",
+        F_FORMULA_ => "'( ! ) Aún no se ha generado pedido a la sucursal destino!!! Generar uno...'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "inserta",
+        F_ALIAS_ => "Generar pedido",
+        F_HELP_ => "Generar pedido",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'select gen_pedido(|{'+p_user_+'}|,'+__local.getStr()+','+__suc.getStr()+','+lprod.getStr()+')'",
+        F_NODB_ => "1",
+        F_ORD_ => "106",
+        F_INLINE_ => "1",
+        C_VIEW_ => "(pedido.getVal()>0&&nro_ped_pnd.get()=='__NO DATA__'&&lprod.get()!='__NO DATA__') && pprov.get()!='Si'",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "add",
+        F_ALIAS_ => "Agregar al Detalle",
+        F_HELP_ => "Agregar al pedido",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'SELECT pedido_det_ins('+nro_ped_pnd.getStr()+','+lcod.getStr()+','+pedido.getVal()+','+urg.getStr()+')'",
+        F_NODB_ => "1",
+        F_ORD_ => "106",
+        C_SHOW_ => "!add.get() && pprov.get()=='No' && remito.get()=='__NO DATA__' && (pedido.getVal() <= exis_pend.getVal()) && pedido.getVal()>0",
+        C_VIEW_ => "nro_ped_pnd.get()!='__NO DATA__'&&nro_ped_pnd.get()!=''&&( (pedido.getVal()>0&&gru.get()!=''&&tipo.get()!='') ||bcodigo.getVal()>0 )",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "addprov",
+        F_ALIAS_ => "Solicitar a Proveedores",
+        F_HELP_ => "Agregar al pedido",
+        F_TYPE_ => "proc",
+        F_QUERY_ => "'select gen_pedido_prov(|{'+p_user_+'}|,'+__local.getStr()+','+__suc.getStr()+','+gru.getStr()+','+tipo.getStr()+','+color.getStr()+','+pedido.getVal()+','+urg.getStr()+','+lcod.getVal()+')'",
+        F_NODB_ => "1",
+        F_ORD_ => "106",
+        C_SHOW_ => "(!addprov.get()&&lcod.getVal() < 1 && pedido.getVal() > 0 && verif_prov.getVal()<1)|| (!addprov.get() && pprov.get()=='Si' && pedido.getVal() > 0 && verif_prov.getVal()<1) ",
+        C_VIEW_ => "nro_ped_pnd.get()=='__NO DATA__'&&pedido.getVal()>0&&color.get()!=''&&gru.get()!=''&&tipo.get()!='' || (!addprov.get() && pprov.get()=='Si') ",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "ped_ab",
+        F_ALIAS_ => "Notas de Pedido Abiertas de Esta Sucursal a otras sucurales.",
+        F_HELP_ => "Pedidos Abiertos",
+        F_TYPE_ => "subform",
+        F_OPTIONS_ => "'estado=|{Abierta}| and __local='+__local.getStr()+''",
+        F_LINK_ => "db.nota_pedido_ab",
+        F_SEND_ => "'1'",
+        F_NODB_ => "1",
+        F_ORD_ => "500",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__reload",
+        F_ALIAS_ => "Recargar",
+        F_HELP_ => "Recargar",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "510",
+        C_SHOW_ => "add.get()||addprov.get()",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "setTimeout('window.location.reload()',2000)",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__reload2",
+        F_ALIAS_ => "Recargar",
+        F_HELP_ => "Recargar",
+        F_TYPE_ => "formula",
+        F_NODB_ => "1",
+        F_ORD_ => "517",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "if(__movme.get()&&_trustee>510){ setTimeout('window.location.reload()',500); }",
+        G_SHOW_ => "512",
+        G_CHANGE_ => "512"));
+
+$Obj->Add(
+    array(
+        F_NAME_ => "__msg5",
+        F_ALIAS_ => "Mensaje",
+        F_HELP_ => "Mensaje",
+        F_TYPE_ => "formula",
+        F_LENGTH_ => "60",
+        F_NODB_ => "1",
+        F_ORD_ => "520",
+        C_SHOW_ => "add.get()||addprov.get()",
+        C_VIEW_ => "false",
+        F_FORMULA_ => "enableMessageButton('Su pedido ha sido agregado favor espere 1 segundo...', 2000)",
+        G_SHOW_ => "64",
+        G_CHANGE_ => "64"));
+
+?>
